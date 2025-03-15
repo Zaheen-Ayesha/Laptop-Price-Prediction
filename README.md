@@ -58,6 +58,7 @@ The goal of EDA is to analyze the relationship between different laptop features
 - Pivot table visualization.
 
 <b>Steps Executed in EDA</b>
+
 1.<b> Regression Analysis for Continuous Features</b>
    - Generated regression plots to analyze the relationship between Price and:
       - CPU_frequency, Screen_Size_inch, Weight_Pounds
