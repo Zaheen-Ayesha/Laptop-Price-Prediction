@@ -34,5 +34,14 @@
 
       df["CPU_frequency"]=df["CPU_frequency"]/df["CPU_frequency"].max()
 
+<b>5. Data Binning:</b>
+- Created 3 price bins (Low, Medium, High) for better classification.
+
+      bins=np.linspace(min(df["Price"]),max(df["Price"]),4)
+      group_names=["Low","Medium","High"]
+      df["Price-binned"]=pd.cut(df["Price"],bins=bins,labels=group_names,include_lowest=True)
+      df[['Price','Price-binned']]
+      
+
 
 
