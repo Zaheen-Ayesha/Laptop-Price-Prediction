@@ -9,3 +9,10 @@
 - Imported the dataset using pandas and examined the first few rows using .head().
 - Assigned meaningful column headers for better readability.
 
+<b>2. Handling Missing Values:</b>
+- Identified null values in each column.
+- Replaced missing values:
+   <b> - Continuous variables:</b> Filled with the column mean.
+   <b> - Categorical variables:</b> Replaced with the most frequently occurring value.
+
+
