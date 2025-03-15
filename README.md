@@ -20,9 +20,11 @@
  
  - <b>Converted Screen Size from cm to inches:</b>
  
-       df["Weight_Pounds"] = df["Weight_kg"] * 2.205
+       df["Screen_Size_cm"] = df["Screen_Size_cm"].astype("float")
   
-       df.drop(columns=["Weight_kg"], inplace=True)
+       df["Screen_Size_inch"] = df["Screen_Size_cm"] * 2.54
+
+       df.drop(columns=["Screen_Size_cm"], inplace=True)
    
 - <b>Converted Weight from kg to pounds:</b>
 
