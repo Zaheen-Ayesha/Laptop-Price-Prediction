@@ -25,5 +25,11 @@
    
       df.drop(columns=["Screen_Size_cm"], inplace=True)
 
+- <b>Converted Weight from kg to pounds:</b>
+
+      df["Weight_Pounds"] = df["Weight_kg"] * 2.205
+  
+      df.drop(columns=["Weight_kg"], inplace=True)
+
 
 
