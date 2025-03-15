@@ -124,7 +124,7 @@ Model development was performed to create a predictive model for estimating lapt
    - Mean Squared Error (MSE)
    - R-Squared (R²) Score
      
-- <b>Key Observations:</b>
+  <b>Key Observations:</b>
 
    - The actual price distribution is more spread out, while the predicted price distribution is overly concentrated in certain price ranges.
      
@@ -134,15 +134,17 @@ Model development was performed to create a predictive model for estimating lapt
      
    - The R-squared (R²) Score is very low (0.134), meaning the model explains only 13.4% of price variation, leaving 86.6% unexplained.
 
-- <b>Conclusion:</b>
+  <b>Conclusion:</b>
 The model in its current state does not generalize well. Improving feature selection, transformations, and experimenting with more complex models could enhance predictive accuracy.
 
 2.<b> Multiple Linear Regression (MLR)</b>
+
 - The model was extended to include multiple features:
   - CPU_frequency, RAM_GB, Storage_GB_SSD, CPU_core, OS, GPU, and Category
+    
 - This allowed the model to capture a more complex relationship between features and price.
 
-- <b>Key Observations</b>
+  <b>Key Observations</b>
 
 - The actual price distribution (red line) is wider, while the predicted price distribution (blue line) is more concentrated, indicating that the model struggles with price variations, especially for high-end laptops.
   
@@ -152,9 +154,153 @@ The model in its current state does not generalize well. Improving feature selec
   
 - The R-Squared Score (R²) increased to 0.508, meaning the model now explains 50.8% of price variation (previously only 13.4%), but 49.2% of variations remain unexplained.
 
-- <b>Conclusion:</b>
+  <b>Conclusion:</b>
 The model has improved significantly but still lacks accuracy in predicting high-end laptop prices. Further optimization with advanced models and better feature selection can enhance its predictive power.
-      
+
+3. <b>Polynomial Regression</b>
+
+The Polynomial Regression model was tested at different degrees (1st, 3rd, and 5th) to analyze how well it captures price variations based on CPU frequency.
+
+<b>Key Findings:</b>
+
+✅ 1st Degree Polynomial (Linear Regression)
+
+R² = 0.1344 (13.44%) → Poor fit, capturing only a small portion of price variation.
+MSE = 284,583.44 → High prediction error.
+Conclusion: A simple linear relationship is insufficient for accurate predictions.
+
+✅ 3rd Degree Polynomial (Cubic Model)
+
+R² = 0.2669 (26.69%) → Better fit, capturing more variation.
+MSE = 241,024.86 → Lower error than the linear model.
+Conclusion: Captures non-linear price trends better, improving accuracy.
+
+✅ 5th Degree Polynomial (Quintic Model)
+
+R² = 0.3080 (30.80%) → Best fit among tested models.
+MSE = 229,137.29 → Further reduced error, but only a small improvement from the 3rd-degree model.
+Conclusion: The model captures more complexity, but may risk overfitting, leading to poor generalization on new data.
+
+<b>Final Insights</b>
+- Higher-degree polynomials improve performance, but the gains diminish beyond a certain point.
+- The R² values remain low (~30%), meaning other important features influencing price are missing.
+- A more balanced model (e.g., 3rd-degree polynomial or alternative algorithms like Random Forest/XGBoost) may offer better performance without overfitting.
+
+4. <b>Pipeline</b>
+A machine learning pipeline was implemented to enhance model performance by scaling parameters, generating polynomial features, and applying Linear Regression using multiple input variables.
+
+<b>Key Findings:</b>
+
+✅ Best Model So Far – The multi-variable polynomial model achieved the lowest Mean Squared Error (MSE = 223,437.70) and highest R² (32.04%), making it the most accurate model tested.
+
+✅ More Features Improved Accuracy – Incorporating multiple features (CPU frequency, RAM, Storage, GPU, OS, Category, etc.) improved the model’s ability to explain price variation compared to single-variable models.
+
+⚠️ Still Room for Improvement – While R² = 32.04% is an improvement, 68% of price variation remains unexplained, suggesting other influential factors are missing.
+
+## Model Evaluation and Refinement
+To enhance model performance and prevent overfitting, multiple validation techniques were applied, including training/testing split, cross-validation, Ridge Regression, and Grid Search. The objective was to evaluate model generalization and identify the best-performing approach for predicting laptop prices.
+
+<b>Key Findings:</b>
+
+✅ Training vs. Testing Performance (Linear Regression with CPU Frequency)
+
+- Training R² = 0.148 (14.8%) → CPU frequency alone explains very little variance in training data.
+- Testing R² = -0.066 (-6.6%) → A negative score indicates the model performs worse than a simple mean prediction, failing to generalize.
+
+⚠️ Cross-Validation Results (4-Fold Validation on CPU Frequency)
+
+- Mean R² = -0.161 → Confirms poor predictive power, as the model underperforms across all validation sets.
+- Std Dev = 0.385 → High variance in results suggests the model is unstable and possibly overfitting.
+
+### Identifying Overfitting in Laptop Price Prediction
+To evaluate the model’s generalization ability, the dataset was split into 50% training and 50% testing, and R² scores were analyzed across different polynomial degrees. The goal was to determine the optimal complexity level before the model starts overfitting.
+
+<b>Key Findings:</b>
+<b>📉 Overfitting Observed at Higher Polynomial Degrees (4 & 5).</b>
+
+- Drastic drop in R² values (negative scores worse than -1) on test data, indicating that the model memorizes training data but fails on unseen data.
+- Higher-degree polynomials (4 & 5) learn noise instead of real patterns, making the model unreliable for predictions.
+  
+<b>✅ Optimal Model Complexity</b>
+
+- Linear (degree = 1) and cubic (degree = 3) regression perform better, balancing bias and variance.
+- Higher-degree models add complexity but do not improve predictive accuracy.
+
+<b>Conclusion</b>
+
+Overfitting occurs when model complexity exceeds optimal levels. A simpler cubic regression (degree = 3) or regularized model is recommended for better generalization and reliability in predicting laptop prices.
+
+##  Ridge Regression
+To improve model generalization and prevent overfitting, a Ridge Regression model was applied using polynomial features (degree = 2) with multiple predictors:
+- CPU Frequency, RAM, Storage (SSD), CPU Cores, OS, GPU, and Category.
+
+<b>Key Findings:</b>
+
+✅ Regularization Reduced Overfitting:
+- Training R² (~0.7) remained stable, showing a strong fit to the training data.
+- Validation R² (~0.4) improved with increasing alpha, meaning regularization helped prevent overfitting.
+
+✅ Effect of Alpha (Regularization Strength):
+- Higher alpha values constrained large coefficients, improving generalization on test data.
+- Small alpha values led to higher variance, allowing overfitting.
+
+✅ Why Regularization Matters?
+- Controls large coefficient values, reducing sensitivity to noise.
+- Helps when dealing with many correlated features (e.g., RAM & Storage).
+- Improves predictive accuracy on unseen data, making the model more reliable.
+
+<b>Conclusion & Next Steps:</b>
+- Optimal Ridge Model: Moderate alpha values (~0.1 to 0.5) give the best trade-off between bias and variance.
+- Further Improvements: Try Lasso Regression to perform feature selection and enhance interpretability.
+- Alternative Models: Random Forest or XGBoost may capture non-linear relationships better than polynomial Ridge Regression.
+
+Regularization significantly improves model generalization by preventing overfitting. A balanced Ridge Regression model is a stronger predictor of laptop prices than high-degree polynomial models alone.
+
+## Grid Search Optimization for Ridge Regression
+To further enhance model performance, GridSearchCV was used to identify the optimal alpha value for Ridge Regression.
+
+<b>Key Findings:</b>
+
+✅ Optimal Alpha Selection:
+- A grid search was conducted over a set of alpha values: {0.0001, 0.001, 0.01, 0.1, 1, 10}.
+- The best-performing model was selected based on 4-fold cross-validation.
+
+✅ Model Performance After Optimization:
+- The best Ridge Regression model achieved an R² score of 0.399 on the test set.
+- This is a significant improvement compared to previous models, showing better price variation explanation.
+
+✅ Why This Matters?
+- Grid search helps find the best hyperparameters, improving model generalization.
+- Ridge Regression with an optimal alpha prevents overfitting while maintaining prediction accuracy.
+
+Using GridSearchCV, we optimized Ridge Regression to explain 39.9% of the price variation, making it the best-performing model so far. 
+
+### Final Conclusion: Laptop Price Prediction Project
+This project aimed to develop a predictive model for laptop prices using various machine learning techniques and feature engineering methods. Through systematic experimentation and model optimization, we explored different regression techniques and evaluated their effectiveness.
+
+✅ Feature Engineering & Initial Regression Models:
+- Polynomial Regression showed better performance than Linear Regression, with higher-degree polynomials capturing more complexity.
+- However, excessive polynomial degrees led to overfitting, reducing model reliability.
+
+✅ Multi-Variable Polynomial Regression & Pipeline Optimization:
+- Incorporating multiple features (CPU frequency, RAM, storage, etc.) improved model accuracy.
+- A Pipeline for feature scaling, transformation, and regression helped streamline the workflow.
+
+✅ Cross-Validation & Overfitting Analysis:
+- Cross-validation confirmed that CPU frequency alone was a weak predictor.
+- Overfitting was detected in higher-degree polynomial models, reinforcing the need for regularization techniques.
+
+✅ Regularization with Ridge Regression & Hyperparameter Tuning:
+- Ridge Regression prevented overfitting by controlling large coefficients.
+- GridSearchCV was used to identify the optimal alpha value, improving the model's ability to generalize.
+
+✅ Best Model Performance:
+- The final Ridge Regression model with an optimized alpha value achieved an R² score of 0.399, explaining 39.9% of the variation in laptop prices.
+
+🔹 Next Steps for Enhancement:
+- Incorporate additional features (brand, display size, GPU type, battery life) for better price prediction.
+- Explore ensemble models like Random Forest or XGBoost for improved accuracy.
+- Experiment with Lasso Regression for feature selection to reduce complexity.
 
 
 
