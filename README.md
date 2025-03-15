@@ -41,6 +41,12 @@
       group_names=["Low","Medium","High"]
       df["Price-binned"]=pd.cut(df["Price"],bins=bins,labels=group_names,include_lowest=True)
       df[['Price','Price-binned']]
+
+<b>6. Feature Engineering:</b>
+- Converted categorical "Screen" attribute into two indicator variables:
+     - Screen-IPS_panel
+     - Screen-Full_HD
+- Dropped the original Screen column after transformation.
       
 
 
