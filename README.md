@@ -4,3 +4,6 @@
 
 <b>Dataset :</b>The dataset contains 238 records and 12 columns, with attributes like Manufacturer, Category, Screen, GPU, OS, CPU_core, Screen_Size_cm, CPU_frequency, RAM_GB, Storage_GB_SSD, Weight_kg, and Price.
 
+## Data Wrangling
+<b>1. Loading Data:</b>
+
