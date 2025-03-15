@@ -17,11 +17,12 @@
     - <b>Categorical variables:</b> Replaced with the most frequently occurring value.
 
  <b>3. Data Standardization:</b>
+ 
  - <b>Converted Screen Size from cm to inches:</b>
  
-      df["Weight_Pounds"] = df["Weight_kg"] * 2.205
+       df["Weight_Pounds"] = df["Weight_kg"] * 2.205
   
-      df.drop(columns=["Weight_kg"], inplace=True)
+       df.drop(columns=["Weight_kg"], inplace=True)
    
 - <b>Converted Weight from kg to pounds:</b>
 
