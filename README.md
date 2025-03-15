@@ -6,4 +6,6 @@
 
 ## Data Wrangling
 <b>1. Loading Data:</b>
+- Imported the dataset using pandas and examined the first few rows using .head().
+- Assigned meaningful column headers for better readability.
 
