@@ -4,7 +4,7 @@
 
 <b>Dataset :</b>The dataset contains 238 records and 12 columns, with attributes like Manufacturer, Category, Screen, GPU, OS, CPU_core, Screen_Size_cm, CPU_frequency, RAM_GB, Storage_GB_SSD, Weight_kg, and Price.
 
-## Data Wrangling
+## 1.Data Wrangling
 <b>1. Loading Data:</b>
 - Imported the dataset using pandas and examined the first few rows using .head().
 - Assigned meaningful column headers for better readability.
@@ -28,6 +28,11 @@
 
       df["Weight_Pounds"] = df["Weight_kg"] * 2.205
       df.drop(columns=["Weight_kg"], inplace=True)
+
+<b>4. Data Normalization:</b>
+- Normalized CPU_frequency to scale it relative to the maximum value in the dataset.
+
+      df["CPU_frequency"]=df["CPU_frequency"]/df["CPU_frequency"].max()
 
 
 
