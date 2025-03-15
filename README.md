@@ -18,8 +18,11 @@
 
  <b>3. Data Standardization:</b>
  - <b>Converted Screen Size from cm to inches:</b>
+ 
       df["Screen_Size_cm"] = df["Screen_Size_cm"].astype("float")
+   
       df["Screen_Size_inch"] = df["Screen_Size_cm"] * 2.54
+   
       df.drop(columns=["Screen_Size_cm"], inplace=True)
 
 
