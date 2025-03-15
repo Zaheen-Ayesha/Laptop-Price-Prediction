@@ -75,13 +75,20 @@ The goal of EDA is to analyze the relationship between different laptop features
 ### Executive Summary of EDA
 
 - <b>CPU Frequency vs. Price:</b> Higher CPU frequency is positively correlated with price, meaning laptops with higher processing power tend to be more expensive.
+  
 - <b>Screen Size vs. Price:</b> A weak correlation was observed, indicating that screen size alone does not significantly determine price.
+  
 - <b>Weight vs. Price:</b> Lighter laptops tend to be pricier, possibly due to premium ultrabook models.
+  
 - <b>RAM & Storage Impact:</b> Laptops with higher RAM and SSD storage generally have higher prices.
+  
 - <b>Category & GPU Influence:</b> Gaming and high-performance laptops (with powerful GPUs) tend to have a significantly higher price range.
+  
 - <b>Operating System Effect:</b> Laptops with macOS or Windows Pro are priced higher than Linux or FreeDOS-based laptops.
+  
 
 ## Pearson Correlation Coefficient & P-Value Analysis
+
 To further quantify the relationship between different attributes and laptop price, we computed the Pearson Correlation Coefficient and P-Value for numerical and categorical features.
 
       from scipy import stats
@@ -100,8 +107,53 @@ Analysis confirms that:
 
 ✅ Screen size and weight do not significantly affect pricing.
 
-✅ The operating system shows a slight negative impact on price, possibly due to budget models running Linux or ChromeOS
+✅ The operating system shows a slight negative impact on price, possibly due to budget models running Linux or ChromeOS.
 
+## Model Development
+
+Model development was performed to create a predictive model for estimating laptop prices based on various features. This helps understand which attributes significantly impact pricing and enables accurate forecasting for unseen data.
+
+1.<b> Simple Linear Regression (SLR)</b>
+
+- A single-variable regression model was built using CPU_frequency as the independent variable.
+  
+- The model was trained to fit the data and predict Price.
+  
+- <b>Evaluation Metrics:</b>
+
+   - Mean Squared Error (MSE)
+   - R-Squared (R²) Score
+     
+- <b>Key Observations:</b>
+
+   - The actual price distribution is more spread out, while the predicted price distribution is overly concentrated in certain price ranges.
+     
+   - This suggests the model fails to capture price variations, particularly at the high and low ends.
+     
+   - The Mean Squared Error (MSE) is high (284583.44), indicating large discrepancies between actual and predicted values.
+     
+   - The R-squared (R²) Score is very low (0.134), meaning the model explains only 13.4% of price variation, leaving 86.6% unexplained.
+
+- <b>Conclusion:</b>
+The model in its current state does not generalize well. Improving feature selection, transformations, and experimenting with more complex models could enhance predictive accuracy.
+
+2.<b> Multiple Linear Regression (MLR)</b>
+- The model was extended to include multiple features:
+  - CPU_frequency, RAM_GB, Storage_GB_SSD, CPU_core, OS, GPU, and Category
+- This allowed the model to capture a more complex relationship between features and price.
+
+- <b>Key Observations</b>
+
+- The actual price distribution (red line) is wider, while the predicted price distribution (blue line) is more concentrated, indicating that the model struggles with price variations, especially for high-end laptops.
+  
+- The model tends to underestimate higher-priced laptops, as seen in the mismatch at the upper end of the price range.
+  
+- The Mean Squared Error (MSE) has improved to 161,680.57 (from 284,583.44), meaning the model makes smaller errors on average.
+  
+- The R-Squared Score (R²) increased to 0.508, meaning the model now explains 50.8% of price variation (previously only 13.4%), but 49.2% of variations remain unexplained.
+
+- <b>Conclusion:</b>
+The model has improved significantly but still lacks accuracy in predicting high-end laptop prices. Further optimization with advanced models and better feature selection can enhance its predictive power.
       
 
 
