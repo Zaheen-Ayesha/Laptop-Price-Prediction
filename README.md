@@ -58,17 +58,17 @@ The goal of EDA is to analyze the relationship between different laptop features
 - Pivot table visualization.
 
 <b>Steps Executed in EDA</b>
-1. Regression Analysis for Continuous Features
+1.<b> Regression Analysis for Continuous Features</b>
    - Generated regression plots to analyze the relationship between Price and:
       - CPU_frequency, Screen_Size_inch, Weight_Pounds
    - Used .corr() function to calculate the correlation of each feature with Price.
 
-2. Box Plot Analysis for Categorical Features
+2.<b> Box Plot Analysis for Categorical Features</b>
    - Created box plots to compare Price distribution across:
      - Category, GPU, OS, CPU_core, RAM_GB, Storage_GB_SSD
    - These plots help identify trends, such as which categories tend to have higher prices.
 
-3. Descriptive Statistical Analysis
+3.<b> Descriptive Statistical Analysis</b>
    - Computed summary statistics including mean, median, standard deviation, and range for numerical attributes.
   
 4. Pivot Table & Heatmap
