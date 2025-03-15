@@ -51,13 +51,9 @@
 ## Exploratory Data Analysis
 <b>Objective</b>
 
-The goal of EDA is to analyze the relationship between different laptop features and their impact on price. This involves:
-- Regression analysis for continuous features.
-- Box plots for categorical features.
-- Correlation analysis.
-- Pivot table visualization.
+The goal of EDA is to analyze the relationship between different laptop features and their impact on price. 
 
-<b>Steps Executed in EDA</b>
+### Steps Executed in EDA</b>
 
 1.<b> Regression Analysis for Continuous Features</b>
    - Generated regression plots to analyze the relationship between Price and:
@@ -75,6 +71,37 @@ The goal of EDA is to analyze the relationship between different laptop features
 4. Pivot Table & Heatmap
    - Grouped GPU, CPU_core, and Price into a pivot table.
    - Used a pcolor plot to visualize how GPU and CPU_core interact with price.
+
+### Executive Summary of EDA
+
+- <b>CPU Frequency vs. Price:</b> Higher CPU frequency is positively correlated with price, meaning laptops with higher processing power tend to be more expensive.
+- <b>Screen Size vs. Price:</b> A weak correlation was observed, indicating that screen size alone does not significantly determine price.
+- <b>Weight vs. Price:</b> Lighter laptops tend to be pricier, possibly due to premium ultrabook models.
+- <b>RAM & Storage Impact:</b> Laptops with higher RAM and SSD storage generally have higher prices.
+- <b>Category & GPU Influence:</b> Gaming and high-performance laptops (with powerful GPUs) tend to have a significantly higher price range.
+- <b>Operating System Effect:</b> Laptops with macOS or Windows Pro are priced higher than Linux or FreeDOS-based laptops.
+
+## Pearson Correlation Coefficient & P-Value Analysis
+To further quantify the relationship between different attributes and laptop price, we computed the Pearson Correlation Coefficient and P-Value for numerical and categorical features.
+
+      from scipy import stats
+      for param in ['RAM_GB','CPU_frequency','Storage_GB_SSD','Screen_Size_inch','Weight_Pounds','CPU_core','OS','GPU','Category']:
+          pearson_coef, p_value = stats.pearsonr(df[param], df['Price'])
+          print(param)
+          print("The Pearson Correlation Coefficient for ",param," is", pearson_coef, " with a P-value of P =", p_value)
+
+### Conclusion
+
+Analysis confirms that: 
+
+✅ RAM and CPU specifications are the most important factors influencing laptop price.
+
+✅ GPU, storage, and laptop category also play a role, but to a lesser extent.
+
+✅ Screen size and weight do not significantly affect pricing.
+
+✅ The operating system shows a slight negative impact on price, possibly due to budget models running Linux or ChromeOS
+
       
 
 
