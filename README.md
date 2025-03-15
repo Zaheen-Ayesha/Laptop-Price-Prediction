@@ -297,7 +297,7 @@ This project aimed to develop a predictive model for laptop prices using various
 ✅ Best Model Performance:
 - The final Ridge Regression model with an optimized alpha value achieved an R² score of 0.399, explaining 39.9% of the variation in laptop prices.
 
-🔹 Next Steps for Enhancement:
+🔹<b> Next Steps for Enhancement:</b>
 - Incorporate additional features (brand, display size, GPU type, battery life) for better price prediction.
 - Explore ensemble models like Random Forest or XGBoost for improved accuracy.
 - Experiment with Lasso Regression for feature selection to reduce complexity.
