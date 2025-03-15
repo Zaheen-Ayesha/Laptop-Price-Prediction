@@ -4,7 +4,7 @@
 
 <b>Dataset :</b>The dataset contains 238 records and 12 columns, with attributes like Manufacturer, Category, Screen, GPU, OS, CPU_core, Screen_Size_cm, CPU_frequency, RAM_GB, Storage_GB_SSD, Weight_kg, and Price.
 
-## 1.Data Wrangling
+## Data Wrangling
 <b>1. Loading Data:</b>
 - Imported the dataset using pandas and examined the first few rows using .head().
 - Assigned meaningful column headers for better readability.
@@ -47,6 +47,15 @@
      - Screen-IPS_panel
      - Screen-Full_HD
 - Dropped the original Screen column after transformation.
+
+## Exploratory Data Analysis
+<b>Objective</b>
+
+The goal of EDA is to analyze the relationship between different laptop features and their impact on price. This involves:
+- Regression analysis for continuous features.
+- Box plots for categorical features.
+- Correlation analysis.
+- Pivot table visualization.
       
 
 
