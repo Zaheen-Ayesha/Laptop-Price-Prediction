@@ -275,7 +275,7 @@ To further enhance model performance, GridSearchCV was used to identify the opti
 
 Using GridSearchCV, we optimized Ridge Regression to explain 39.9% of the price variation, making it the best-performing model so far. 
 
-### Final Conclusion: Laptop Price Prediction Project
+## Final Conclusion: Laptop Price Prediction Project
 This project aimed to develop a predictive model for laptop prices using various machine learning techniques and feature engineering methods. Through systematic experimentation and model optimization, we explored different regression techniques and evaluated their effectiveness.
 
 ✅ Feature Engineering & Initial Regression Models:
